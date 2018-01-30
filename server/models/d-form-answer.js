@@ -47,10 +47,13 @@ module.exports = function dynamicFormAnswerModel(we) {
 
       // Class methods for use with: we.db.models.[yourmodel].[method]
       classMethods: {
-        createAndSaveValues(data, formId) {
+        createAndSaveValues(data, formId, creatorId) {
           return new Promise( (resolve, reject)=> {
             we.db.models['d-form-answer']
-            .create({})
+            .create({
+              creatorId: creatorId,
+              formId: formId
+            })
             .then( (answer)=> {
               let saves = [];
 
@@ -129,6 +132,7 @@ module.exports = function dynamicFormAnswerModel(we) {
         },
         sendEmails(req, res, next) {
           const record = this;
+          const form = res.locals.data;
 
           let appName = we.config.appName;
 
@@ -142,6 +146,8 @@ module.exports = function dynamicFormAnswerModel(we) {
           const templateVariables = {
             name: userName,
             email: userEmail,
+            formName: form.name,
+            formTitle: form.title,
             phone: (
               record.getDFieldValue('cellPhone') ||
               record.getDFieldValue('phone')
@@ -151,21 +157,18 @@ module.exports = function dynamicFormAnswerModel(we) {
             siteUrl: we.config.hostname
           };
 
-          // send the emails in async
-
-          // reply to institucional
+          // default to reply to institucional
           let emailContact = we.config.email.mailOptions.from;
 
           if (we.systemSettings && we.systemSettings.emailContact) {
             emailContact = we.systemSettings.emailContact;
           }
 
-          // hardcoded whyle we dont have an config for this:
-          emailContact = 'eipianova@gmail.com;piano@hoteldomhenrique.com.br'
-          emailContact += ';Linky Systems <alberto@linkysystems.com>';
+          emailContact = form.to;
 
           we.email.sendEmail('formNewAnswerAlert', {
-            to: emailContact
+            to: (form.to || null),
+            replyTo: (form.replyTo || null),
           }, templateVariables, (err)=> {
             if (err) {
               we.log.error('formNewAnswerAlert:create:sendEmail:', err);
