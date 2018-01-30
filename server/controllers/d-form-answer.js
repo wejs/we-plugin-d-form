@@ -39,7 +39,8 @@ module.exports = {
           }
         })
         .then( (values)=> {
-          r.values = values
+          r.values = values;
+          return null;
         });
       });
 
@@ -86,6 +87,13 @@ module.exports = {
   findOne(req, res, next) {
     if (!res.locals.data) {
       return next();
+    }
+
+    // check if can access contents unpublished
+    if (!res.locals.data.published) {
+      if (!req.we.acl.canStatic('access_form_unpublished', req.userRoleNames)) {
+        return res.forbidden();
+      }
     }
 
     req.we.db.models['d-form-value']

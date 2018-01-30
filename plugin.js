@@ -7,6 +7,11 @@ module.exports = function loadPlugin(projectPath, Plugin) {
   const plugin = new Plugin(__dirname);
 
   plugin.setConfigs({
+    permissions: {
+      'access_form_unpublished': {
+        'title': 'Access unpublished form'
+      }
+    },
     emailTypes: {
       formNewAnswerAlert: {
         defaultSubject: '[{{siteName}}] Nova resposta no formulário {{formName}}',
