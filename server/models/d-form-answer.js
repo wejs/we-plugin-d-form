@@ -47,7 +47,7 @@ module.exports = function dynamicFormAnswerModel(we) {
 
       // Class methods for use with: we.db.models.[yourmodel].[method]
       classMethods: {
-        createAndSaveValues(data) {
+        createAndSaveValues(data, formId) {
           return new Promise( (resolve, reject)=> {
             we.db.models['d-form-answer']
             .create({})

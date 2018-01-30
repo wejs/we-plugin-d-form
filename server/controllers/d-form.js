@@ -118,8 +118,13 @@ module.exports = {
       delete req.body.ip;
       delete req.body['g-recaptcha-response'];
 
+      let creatorId;
+      if (req.isAuthenticated()) {
+        creatorId = req.user.id;
+      }
+
       req.we.db.models['d-form-answer']
-      .createAndSaveValues(req.body)
+      .createAndSaveValues(req.body, res.locals.id, creatorId)
       .then( (answer)=> {
         res.locals.successMessage = 'Dados enviados com sucesso.';
         res.addMessage('success', 'Dados enviados com sucesso');
