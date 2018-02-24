@@ -116,5 +116,5 @@ module.exports = function(we) {
     });
 
     return new we.hbs.SafeString(html);
-  }
-}
+  };
+};

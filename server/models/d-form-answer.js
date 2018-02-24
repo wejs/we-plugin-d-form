@@ -96,7 +96,7 @@ module.exports = function dynamicFormAnswerModel(we) {
                 })
                 .then( (r)=> {
                   return answer.save()
-                               .then( ()=>{ return r; })
+                    .then( ()=>{ return r; });
                 })
                 .then( (r)=> {
                   resolve(r);
