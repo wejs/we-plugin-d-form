@@ -10,7 +10,7 @@ module.exports = function dynamicFormModel(we) {
         allowNull: false
       },
       title: {
-        type: we.db.Sequelize.STRING,
+        type: we.db.Sequelize.STRING(1200),
         size: 1200,
         allowNull: true
       },
@@ -24,11 +24,13 @@ module.exports = function dynamicFormModel(we) {
       },
       replyTo: {
         type: we.db.Sequelize.TEXT,
-        allowNull: true
+        allowNull: true,
+        skipSanitizer: true
       },
       to: {
         type: we.db.Sequelize.TEXT,
-        allowNull: true
+        allowNull: true,
+        skipSanitizer: true
       },
       type: {
         type: we.db.Sequelize.STRING,
