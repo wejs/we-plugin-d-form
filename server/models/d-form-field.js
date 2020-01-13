@@ -105,19 +105,7 @@ module.exports = function dynamicFormFieldModel(we) {
     options: {
       // title field, for default title record pages
       titleField: 'id',
-
-      // Class methods for use with: we.db.models.[yourmodel].[method]
-      // classMethods: {
-      //   // suport to we.js url alias feature
-      //   urlAlias(record) {
-      //     return {
-      //       alias: '/d-form/' + record.id + '-'+  we.utils
-      //         .string( record.name )
-      //         .slugify().s,
-      //       target: '/d-form/' + record.id,
-      //     };
-      //   }
-      // },
+      enableAlias: false,
       // record method for use with record.[method]
       instanceMethods: {}
     }

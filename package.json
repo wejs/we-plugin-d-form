@@ -4,18 +4,21 @@
   "version": "2.0.1",
   "main": "plugin.js",
   "scripts": {
-    "test": "echo 'todo!'"
+    "test": "NODE_ENV=test LOG_LV=info ./node_modules/.bin/mocha test/bootstrap.js test/**/*.test.js",
+    "coverage": "NODE_ENV=test LOG_LV=info nyc ./node_modules/.bin/mocha test/bootstrap.js test/**/*.test.js -b"
   },
   "dependencies": {},
   "devDependencies": {
-    "express-mysql-session": "^2.1.0",
-    "fs-extra": "^7.0.1",
-    "mocha": "^6.0.2",
-    "mysql2": "^1.6.5",
-    "rimraf": "^2.6.3",
+    "connect-sqlite3": "^0.9.11",
+    "fs-extra": "^8.1.0",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0",
+    "sqlite3": "^4.1.1",
+    "mysql2": "^2.1.0",
+    "rimraf": "^3.0.0",
     "supertest": "^4.0.2",
-    "we-core": "^2",
-    "we-test-tools": "wejs/we-test-tools"
+    "we-core": "^3.0.0",
+    "we-test-tools": "^1.0.0"
   },
   "author": "Alberto Souza <contato@albertosouza.net>",
   "license": "MIT",

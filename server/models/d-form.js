@@ -78,10 +78,9 @@ module.exports = function dynamicFormModel(we) {
       classMethods: {
         // suport to we.js url alias feature
         urlAlias(record) {
+          let slugPart2 = we.utils.stripTagsAndTruncate ( record.id + '-' + record.name, 30, '');
           return {
-            alias: '/d-form/' + record.id + '-'+  we.utils
-              .string( record.name )
-              .slugify().s,
+            alias: '/d-form/' + slugPart2,
             target: '/d-form/' + record.id,
           };
         }

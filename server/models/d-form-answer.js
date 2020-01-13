@@ -44,6 +44,7 @@ module.exports = function dynamicFormAnswerModel(we) {
     options: {
       // title field, for default title record pages
       titleField: 'id',
+      enableAlias: false,
 
       // Class methods for use with: we.db.models.[yourmodel].[method]
       classMethods: {
@@ -108,16 +109,6 @@ module.exports = function dynamicFormAnswerModel(we) {
             .catch(reject);
           });
         }
-
-      //   // suport to we.js url alias feature
-      //   urlAlias(record) {
-      //     return {
-      //       alias: '/d-form/' + record.id + '-'+  we.utils
-      //         .string( record.name )
-      //         .slugify().s,
-      //       target: '/d-form/' + record.id,
-      //     };
-      //   }
       },
       // record method for use with record.[method]
       instanceMethods: {
